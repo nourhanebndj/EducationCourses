@@ -1,3 +1,56 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '../espace_utilisateur/php/Connexion_user.php'; 
+
+// Connexion à la base de données 'admin' pour les catégories
+$con_admin = mysqli_connect("localhost", "root", "", "admin");
+if (mysqli_connect_error()) {
+    echo "Erreur de connexion à la base de donnée 'admin'";
+    exit();
+}
+
+// Connexion à la base de données 'education' pour les membres
+$con_education = mysqli_connect("localhost", "root", "", "education");
+if (mysqli_connect_error()) {
+    echo "Erreur de connexion à la base de donnée 'education'";
+    exit();
+}
+
+session_start();
+if (!isset($_SESSION['AdminLoginId'])) {
+    header("location:./Authentification/Connexion_admin.php");
+    exit();
+}
+
+// Nombre de catégories
+$total_categories = 0;
+$query_categories = "SELECT COUNT(*) as total_categories FROM catégories"; // Vérifiez le nom correct de la table
+$result_categories = mysqli_query($con_admin, $query_categories);
+if ($result_categories) {
+    $row_categories = mysqli_fetch_assoc($result_categories);
+    if ($row_categories) {
+        $total_categories = $row_categories['total_categories'];
+    }
+} else {
+    echo 'Erreur lors de l\'exécution de la requête pour les catégories : ' . mysqli_error($con_admin);
+}
+
+// Nombre de membres
+$total_members = 0;
+$query_members = "SELECT COUNT(*) as total_members FROM membre"; // Vérifiez le nom correct de la table
+$result_members = mysqli_query($con_education, $query_members);
+if ($result_members) {
+    $row_members = mysqli_fetch_assoc($result_members);
+    if ($row_members) {
+        $total_members = $row_members['total_members'];
+    }
+} else {
+    echo 'Erreur lors de l\'exécution de la requête pour les membres : ' . mysqli_error($con_education);
+}
+
+// Fermer les connexions
+mysqli_close($con_admin);
+mysqli_close($con_education);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +66,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="./css/admin.css">
 </head>
 
 <body>
@@ -27,7 +80,9 @@
 
             <div class="header-right">
                 <span class="material-icons-outlined">account_circle</span>
+                <h1>Welcome -<?php echo $_SESSION['AdminLoginId'] ?></h1>
             </div>
+
         </header>
         <!-- End Header -->
 
@@ -48,17 +103,26 @@
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="./Formations.php" target="_blank">
+                    <a href="#" onclick="toggleSubMenu('formations-sub-menu'); return false;">
                         <span class="material-icons-outlined">inventory_2</span> Formations
                     </a>
+                    <ul id="formations-sub-menu" class="sub-menu" style="display: none;">
+                        <li><a href="./formations/Formations.php" target="_blank">Voir les formations</a></li>
+                        <li><a href="./AddFormation.php" target="_blank">Ajouter les formations</a></li>
+                    </ul>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="./Categories.php" target="_blank">
+                    <a href="#" onclick="toggleSubMenu('categories-sub-menu'); return false;">
                         <span class="material-icons-outlined">category</span> Catégories
                     </a>
+                    <ul id="categories-sub-menu" class="sub-menu" style="display: none;">
+                        <li><a href="./Categorie/allcategories.php" target="_blank">Voir les catégories</a>
+                        </li>
+                    </ul>
                 </li>
+
                 <li class="sidebar-list-item">
-                    <a href="./Membres.php" target="_blank">
+                    <a href="./Membre/Membres.php" target="_blank">
                         <span class="material-icons-outlined">groups</span> Membres
                     </a>
                 </li>
@@ -68,10 +132,16 @@
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="./Profil.php" target="_blank">
-                        <span class="material-icons-outlined">person</span> Profile
+                    <a href="./Authentification/Admins.php" target="_blank">
+                        <span class="material-icons-outlined">person</span> Administrateurs
                     </a>
                 </li>
+                <li class="sidebar-list-item">
+                    <a href="./Authentification/logout.php">
+                        <span class="material-icons-outlined">logout</span> Déconnexion
+                    </a>
+                </li>
+
             </ul>
         </aside>
         <!-- End Sidebar -->
@@ -91,13 +161,12 @@
                     </div>
                     <h1>249</h1>
                 </div>
-
                 <div class="card">
                     <div class="card-inner">
                         <h3>CATEGORIES</h3>
                         <span class="material-icons-outlined">category</span>
                     </div>
-                    <h1>25</h1>
+                    <h1><?php echo $total_categories; ?></h1>
                 </div>
 
                 <div class="card">
@@ -105,7 +174,7 @@
                         <h3>MEMBRES</h3>
                         <span class="material-icons-outlined">groups</span>
                     </div>
-                    <h1>1500</h1>
+                    <h1><?php echo $total_members; ?></h1>
                 </div>
 
                 <div class="card">

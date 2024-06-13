@@ -21,7 +21,89 @@ body {
       'sidebar main main main';
     height: 100vh;
   }
-  
+  /*-----------Connexion Admin---------------*/
+  body.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+.login-container {
+    width: 500px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-card {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+  background-color: #fff;
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #cc3a1a;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button[type="submit"]:hover {
+  background-color: #cc3a1a;
+}
+
+/* Image section styling */
+.login-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;  
+}
+
+.login-image img {
+  width: 100%;  
+  height: 100%; 
+  object-fit: cover;  
+}
+
+
+
+
   /* ---------- HEADER ---------- */
   .header {
     grid-area: header;
@@ -36,6 +118,24 @@ body {
   .menu-icon {
     display: none;
   }
+  .header-right {
+    display: flex;
+    align-items: center;  /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment, change as needed */
+    font-size: 24px; /* Adjust size as needed */
+}
+
+.header-right .material-icons-outlined {
+    /* Adjust icon size and margin */
+    font-size: 48px;  /* Icon size, adjust as needed */
+    margin-right: 10px;  /* Space between icon and text */
+}
+
+.header-right h1 {
+    font-size: 24px; 
+    margin: 0;  
+}
+
   
   /* ---------- SIDEBAR ---------- */
   
@@ -86,7 +186,23 @@ body {
     text-decoration: none;
     color: #ffffff;
   }
-  
+  .sidebar-list-item .sub-menu {
+    padding-top:5px;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.sidebar-list-item .sub-menu li a {
+    display: block;
+    color: #ffffff;
+    padding: 8px;
+    text-decoration: none;
+}
+
+.sidebar-list-item .sub-menu li a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
   .sidebar-responsive {
     display: inline !important;
     position: absolute;
@@ -221,37 +337,98 @@ body {
     }
   }
 
-  /*Ajouter une categorie*/
-  .icon-dropdown {
-    position: relative;
-    font-size: 16px;
-    user-select: none;
-}
-.icon-dropdown-current {
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-}
-.icon-dropdown-list {
-    position: absolute;
-    width: 100%;
-    border: 1px solid #ccc;
-    background: white;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: none; 
-}
-.icon-dropdown-list li {
-    padding: 5px 10px;
-    cursor: pointer;
-}
-.icon-dropdown-list li:hover {
-    background-color: #f0f0f0;
+
+/*Ajouter une categorie*/
+
+
+.card-category {
+  background-color: #ffffff; /* White background for the card */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ddd; /* Light gray border around the card */
 }
 
-  /*Fin de page Ajouter une categorie*/
+.card-header {
+  background-color: #ffffff; /* White background for the header */
+  color: #000000; /* Black text for contrast */
+  padding: 15px;
+  border-bottom: 1px solid #ddd; /* Light gray border under the header for separation */
+}
+
+.card-header h4 {
+  margin: 0; 
+  font-size: 24px; 
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse; 
+  margin-top: 20px;
+}
+
+.table thead th {
+  background-color: #ffffff; 
+  color: #000000; 
+  padding: 12px;
+  border: 1px solid #ddd; 
+}
+
+.table tbody tr {
+  background-color: #ffffff; 
+  color: #000000; 
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table th, .table td {
+  padding: 12px;
+  border: 1px solid #ddd; 
+  text-align: left;
+}
+
+.btn-primary {
+  background-color: #cc3a1a; 
+}
+
+.btn-primary:hover {
+  background-color: #d65f2f; /* Hover state for primary button */
+}
+
+.btn-success {
+  background-color: #28a745; 
+}
+
+.btn-success:hover {
+  background-color: #218838; /* Hover state for success button */
+}
+
+.btn-danger {
+  background-color: #dc3545; 
+}
+
+.btn-danger:hover {
+  background-color: #c82333; 
+}
+ .form .label{
+  color: #000000;
+ }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .card {
+      margin: 10px;
+      padding: 10px; 
+  }
+  
+}
+
+
+/*Fin de page Ajouter une categorie*/

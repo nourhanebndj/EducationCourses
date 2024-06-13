@@ -1,40 +1,42 @@
 <?php
 session_start();
-$bdd = new PDO('mysql:host=localhost;dbname=espace_membre;charset=utf8', 'root', '');
+$bdd = new PDO('mysql:host=localhost;dbname=education;charset=utf8', 'root', '');
 
 $message = "";
 
-if (isset($_POST['submit'])) {
-    if (!empty($_POST['pseudo']) && !empty($_POST['mdp']) && !empty($_POST['email']) && !empty($_POST['telephone'])) {
-        $pseudo = htmlspecialchars($_POST['pseudo']);
-        $email = htmlspecialchars($_POST['email']);
-        $telephone = htmlspecialchars($_POST['telephone']);
+if (isset($_POST['envoi'])) {
+    if (isset($_POST['NomComplet']) && !empty($_POST['mdp'])) {
+        $NomComplet = htmlspecialchars($_POST['NomComplet']);
         $mdp = $_POST['mdp'];
+        $email = $_POST['email'];
+        $telephone = $_POST['telephone'];
 
-        $checkUser = $bdd->prepare('SELECT * FROM Etudiant WHERE email = ? OR pseudo = ?');
-        $checkUser->execute(array($email, $pseudo));
+        $checkUser = $bdd->prepare('SELECT * FROM membre WHERE email = ? OR NomComplet = ?');
+        $checkUser->execute(array($email, $NomComplet));
         $existingUser = $checkUser->fetch();
 
         if (!$existingUser) {
             $hashedPassword = password_hash($mdp, PASSWORD_BCRYPT);
-            $insertUser = $bdd->prepare('INSERT INTO Etudiant(pseudo, email, telephone, mdp) VALUES (?, ?, ?, ?)');
-            $success = $insertUser->execute(array($pseudo, $email, $telephone, $hashedPassword));
+            $insertUser = $bdd->prepare('INSERT INTO membre(NomComplet, email, telephone, mdp) VALUES (?, ?, ?, ?)');
+            $success = $insertUser->execute(array($NomComplet, $email, $telephone, $hashedPassword));
 
             if ($success) {
-                $message = "Inscription réussie !";
+                $_SESSION['user_id'] = $bdd->lastInsertId(); 
+                $_SESSION['user_name'] = $NomComplet; 
+                header("Location: home.php");
+                exit(); 
             } else {
                 $message = "Erreur lors de l'inscription.";
             }
         } else {
-            $message = "Un utilisateur avec le même email ou le même pseudo existe déjà.";
+            $message = "Un utilisateur avec le même email ou le même nom existe déjà.";
         }
     } else {
         $message = "Veuillez remplir tous les champs.";
     }
 }
-
-echo $message; 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -53,7 +55,7 @@ echo $message;
             <div class="input-group">
                 <div class="input-field">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" name="pseudo" placeholder="Nom complet" required>
+                    <input type="text" name="NomComplet" placeholder="Nom complet" required>
                 </div>
                 <div class="input-field">
                     <i class="fa-solid fa-envelope"></i>
@@ -69,10 +71,12 @@ echo $message;
                 </div>
             </div>
             <div class="btn-field">
-                <button type="submit" name="submit">Inscription</button>
-                <a href="se_connecter.html"><button type="button">Connexion</button></a>
+                <button type="submit" name="envoi">Inscription</button>
+                <a href="se_connecter.php" class="button-link">Connexion</a>
             </div>
         </form>
+
+
         <p><?php echo $message; ?></p>
     </div>
 </body>

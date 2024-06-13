@@ -1107,17 +1107,28 @@ form p a{
   display: flex;
   justify-content: space-between;
 }
-.btn-field button{
-  flex-basis: 48%;
-  background: #E94E1B;
-  color: white;
-  height: 40px;
-  border-radius: 20px;
-  border: 0;
-  outline: O;
-  cursor: pointer;
-  transition: background 1s;
+.btn-field button,
+.btn-field .button-link {
+    flex-basis: 48%;  /* Adjusts the width to be half of the container minus a small gap */
+    background: #E94E1B;
+    color: white;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    padding: 0 15px;  /* Adjust padding as needed */
+    text-align: center;  /* Centers text in the button */
+    display: inline-block;  /* Makes the link behave like a button */
+    line-height: 40px;  /* Aligns text vertically */
+    text-decoration: none;  /* Removes underline from the link */
+    cursor: pointer;  /* Shows a pointer cursor on hover */
+    transition: background 0.3s;  /* Smooth background color transition */
 }
+
+.btn-field .button-link:hover,
+.btn-field button:hover {
+    background: #cc3a1a;  /* Darker shade on hover for visual feedback */
+}
+
 .input-group{
   height: 280px;
 }
@@ -1202,6 +1213,7 @@ form p a{
   }
 }
 /* Fin page Se connecter*/
+
 /*  page Formations details*/
 
 /* Fin page Formations details*/
