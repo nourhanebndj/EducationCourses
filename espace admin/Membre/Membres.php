@@ -37,6 +37,7 @@ if (!isset($_SESSION['AdminLoginId'])) {
 <body>
     <div class="grid-container">
 
+
         <!-- Header -->
         <header class="header">
             <div class="menu-icon" onclick="openSidebar()">
@@ -63,7 +64,7 @@ if (!isset($_SESSION['AdminLoginId'])) {
 
             <ul class="sidebar-list">
                 <li class="sidebar-list-item">
-                    <a href="./Authentification/Profil.php" target="_blank">
+                    <a href="../Dashboard.php" target="_blank">
                         <span class="material-icons-outlined">dashboard</span> Tableau de bord
                     </a>
                 </li>
@@ -72,8 +73,9 @@ if (!isset($_SESSION['AdminLoginId'])) {
                         <span class="material-icons-outlined">inventory_2</span> Formations
                     </a>
                     <ul id="formations-sub-menu" class="sub-menu" style="display: none;">
-                        <li><a href="./Formations/Formations.php" target="_blank">Voir les formations</a></li>
-                        <li><a href="./AddFormation.php" target="_blank">Ajouter les formations</a></li>
+                        <li><a href="../formations/Formations.php" target="_blank">Voir les formations</a></li>
+                        <li><a href="../formations/ajouter_formation.php" target="_blank">Ajouter les formations</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="sidebar-list-item">
@@ -81,15 +83,13 @@ if (!isset($_SESSION['AdminLoginId'])) {
                         <span class="material-icons-outlined">category</span> Catégories
                     </a>
                     <ul id="categories-sub-menu" class="sub-menu" style="display: none;">
-                        <li><a href="./Categorie/Addcategories.php" target="_blank">Voir les catégories</a>
+                        <li><a href="../Categorie/allcategories.php" target="_blank">Voir les catégories</a>
                         </li>
-
-                        <li><a href="./Categorie/Addcategories.php" target="_blank">Ajouter une catégorie</a></li>
                     </ul>
                 </li>
 
                 <li class="sidebar-list-item">
-                    <a href="./Membres.php" target="_blank">
+                    <a href="../Membre/Membres.php" target="_blank">
                         <span class="material-icons-outlined">groups</span> Membres
                     </a>
                 </li>
@@ -99,12 +99,12 @@ if (!isset($_SESSION['AdminLoginId'])) {
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="./Profil.php" target="_blank">
-                        <span class="material-icons-outlined">person</span> Profile
+                    <a href="../Authentification/Admins.php" target="_blank">
+                        <span class="material-icons-outlined">person</span> Administrateurs
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="logout.php">
+                    <a href="../Authentification/logout.php">
                         <span class="material-icons-outlined">logout</span> Déconnexion
                     </a>
                 </li>

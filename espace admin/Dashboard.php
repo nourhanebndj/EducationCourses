@@ -36,7 +36,7 @@ if ($result_categories) {
 
 // Nombre de membres
 $total_members = 0;
-$query_members = "SELECT COUNT(*) as total_members FROM membre"; // Vérifiez le nom correct de la table
+$query_members = "SELECT COUNT(*) as total_members FROM membre";
 $result_members = mysqli_query($con_education, $query_members);
 if ($result_members) {
     $row_members = mysqli_fetch_assoc($result_members);
@@ -108,7 +108,7 @@ mysqli_close($con_education);
                     </a>
                     <ul id="formations-sub-menu" class="sub-menu" style="display: none;">
                         <li><a href="./formations/Formations.php" target="_blank">Voir les formations</a></li>
-                        <li><a href="./AddFormation.php" target="_blank">Ajouter les formations</a></li>
+                        <li><a href="./formations/ajouter_formation.php" target="_blank">Ajouter les formations</a></li>
                     </ul>
                 </li>
                 <li class="sidebar-list-item">

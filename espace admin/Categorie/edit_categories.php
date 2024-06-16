@@ -45,30 +45,34 @@ if ($con->connect_error) {
 
 <body>
     <div class="grid-container">
+
         <!-- Header -->
         <header class="header">
             <div class="menu-icon" onclick="openSidebar()">
                 <span class="material-icons-outlined">menu</span>
             </div>
+
             <div class="header-right">
                 <span class="material-icons-outlined">account_circle</span>
-                <h1>Welcome - <?php echo htmlspecialchars($_SESSION['AdminLoginId'], ENT_QUOTES, 'UTF-8'); ?></h1>
+                <h1>Welcome -<?php echo $_SESSION['AdminLoginId'] ?></h1>
             </div>
+
         </header>
+        <!-- End Header -->
 
         <!-- Sidebar -->
         <aside id="sidebar">
             <div class="sidebar-title">
                 <div class="sidebar-brand">
                     <a href="#" class="nav__logo">
-                        <i class="ri-book-line"></i> Education
-                    </a>
+                        <i class="ri-book-line"></i>Education</a>
                 </div>
                 <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
             </div>
+
             <ul class="sidebar-list">
                 <li class="sidebar-list-item">
-                    <a href="./Dashboard.php">
+                    <a href="../Dashboard.php" target="_blank">
                         <span class="material-icons-outlined">dashboard</span> Tableau de bord
                     </a>
                 </li>
@@ -77,8 +81,9 @@ if ($con->connect_error) {
                         <span class="material-icons-outlined">inventory_2</span> Formations
                     </a>
                     <ul id="formations-sub-menu" class="sub-menu" style="display: none;">
-                        <li><a href="./formations/Formations.php">Voir les formations</a></li>
-                        <li><a href="./AddFormation.php">Ajouter des formations</a></li>
+                        <li><a href="../formations/Formations.php" target="_blank">Voir les formations</a></li>
+                        <li><a href="../formations/ajouter_formation.php" target="_blank">Ajouter les formations</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="sidebar-list-item">
@@ -86,27 +91,35 @@ if ($con->connect_error) {
                         <span class="material-icons-outlined">category</span> Catégories
                     </a>
                     <ul id="categories-sub-menu" class="sub-menu" style="display: none;">
-                        <li><a href="./Categorie/ViewCategories.php">Voir les catégories</a></li>
-                        <li><a href="./Categorie/Addcategories.php">Ajouter une catégorie</a></li>
+                        <li><a href="../Categorie/allcategories.php" target="_blank">Voir les catégories</a>
+                        </li>
                     </ul>
                 </li>
+
                 <li class="sidebar-list-item">
-                    <a href="./Membre/Membres.php">
+                    <a href="../Membre/Membres.php" target="_blank">
                         <span class="material-icons-outlined">groups</span> Membres
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="./Authentification/Profil.php">
-                        <span class="material-icons-outlined">person</span> Profil
+                    <a href="#" target="_blank">
+                        <span class="material-icons-outlined">fact_check</span> Commandes
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="./Authentification/logout.php">
+                    <a href="../Authentification/Admins.php" target="_blank">
+                        <span class="material-icons-outlined">person</span> Administrateurs
+                    </a>
+                </li>
+                <li class="sidebar-list-item">
+                    <a href="../Authentification/logout.php">
                         <span class="material-icons-outlined">logout</span> Déconnexion
                     </a>
                 </li>
+
             </ul>
         </aside>
+        <!-- End Sidebar -->
         <main class="main-container">
             <div class="content-wrapper">
                 <section class="content mt-4">
