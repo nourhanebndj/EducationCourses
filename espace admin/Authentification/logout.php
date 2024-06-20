@@ -1,4 +1,6 @@
 <?php
+define('BASE_URL', 'http://educationdz.free.nf)/');
+
 session_start();  // Start the session to gain access to the session variables
 
 // Clear session data from memory

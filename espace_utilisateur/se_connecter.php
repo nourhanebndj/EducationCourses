@@ -1,50 +1,25 @@
 <?php
-// Variables de configuration de la base de données
-$dbHost = "localhost";
-$dbUsername = "root";
-$dbPassword = "";
-$dbName = "education";
+session_start();
+$bdd = new PDO('mysql:host=localhost;dbname=education;charset=utf8', 'root', '');
 
-// Connexion à la base de données
-$bdd = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8", $dbUsername, $dbPassword);
-
-// Vérifier la connexion à la base de données
-if (!$bdd) {
-    die("La connexion à la base de données a échoué.");
-}
-
-$message = ""; 
-
-// Traitement de la connexion
-if (isset($_POST['envoi'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $mdp = $_POST['mdp'];
 
-    // Recherche de l'utilisateur dans la base de données
     $checkUser = $bdd->prepare('SELECT * FROM membre WHERE email = ?');
-    $checkUser->execute(array($email));
+    $checkUser->execute([$email]);
     $user = $checkUser->fetch();
 
-    if ($user) {
-        $hashedPassword = $user['mdp'];
-
-        // Vérification du mot de passe
-        if (password_verify($mdp, $hashedPassword)) {
-            // Connexion réussie, rediriger vers la page d'accueil ou autre page souhaitée
-            session_start();
-            $_SESSION['connexion_reussie'] = true;
-            header("Location: home.php");
-            exit();
-        } else {
-            $message = "Identifiants de connexion invalides. Veuillez réessayer.";
-        }
+    if ($user && password_verify($mdp, $user['mdp'])) {
+        $_SESSION['user_id'] = $user['Id_membre'];
+        $_SESSION['user_name'] = $user['NomComplet'];
+        header("Location: home.php");
+        exit();
     } else {
-        $message = "Identifiants de connexion invalides. Veuillez réessayer.";
+        echo "Identifiants de connexion invalides.";
     }
 }
 
-// Utilisation de la variable $message après son assignation
-echo $message;
 ?>
 
 <!DOCTYPE html>

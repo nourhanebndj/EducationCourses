@@ -1,5 +1,16 @@
 <?php
-session_start();  
+require_once $_SERVER['DOCUMENT_ROOT'] . '../espace admin/php/Connexion_bdd.php'; 
+session_start();
+
+// Fetch categories from the database
+$categories = [];
+$query = "SELECT * FROM catégories";
+$query_run = mysqli_query($con, $query);
+if ($query_run) {
+    while ($row = mysqli_fetch_assoc($query_run)) {
+        $categories[] = $row;
+    }
+}
 
 
 ?>
@@ -47,21 +58,19 @@ session_start();
                         </a>
 
                         <ul class="dropdown__menu">
-                            <li><a href="#" class="dropdown__link">Graphic Design</a>
+                            <?php foreach ($categories as $category): ?>
+                            <li>
+                                <a href="formations_categories.php?Id_categorie=<?php echo $category['Id_categorie']; ?>"
+                                    class="dropdown__link"><?php echo htmlspecialchars($category['nomcategorie']); ?></a>
                             </li>
-                            <li><a href="#" class="dropdown__link">Boutique en ligne</a>
-                            </li>
-                            <li><a href="#" class="dropdown__link">Facebook
-                                    Ads</a></li>
-                            <li><a href="#" class="dropdown__link">Photographie de
-                                    produits</a>
-                            </li>
+                            <?php endforeach; ?>
                         </ul>
                     </li>
                     <li><a href="contact.php" class="nav__link"><i class="ri-contacts-line"></i> Contactez-nous</a>
                     </li>
                     <li><a href="se_connecter.php" class="nav__link"><i class="ri-user-2-line"></i> Se connecter</a>
                     </li>
+
 
                 </ul>
 
@@ -80,7 +89,7 @@ session_start();
             <h1>L'évolution de la formation en Algérie</h1>
             <p>Une école de formation innovante pour un apprentissage facile et efficace des compétences les plus
                 recherchées par les entreprises.</p>
-            <a href="#" class="btn">Voir nos formations</a>
+            <a href="./formations.php" class="btn">Voir nos formations</a>
         </div>
     </section>
     <!--=============== Home Section 2 ===============-->
@@ -125,7 +134,7 @@ session_start();
             <p>Zducations Academy propose des formations exclusivement dédiées au monde du digital.
                 Toutes les formations enseignées vous permettront de vous positionner comme un professionnel du domaine
                 et vous propulseront dans le monde du travail professionnel.</p>
-            <a href="#" class="btn">Voir nos formations</a>
+            <a href="./formations.php" class="btn">Voir nos formations</a>
         </div>
         <div class="home-image">
             <img src="./image/formations.png" alt="Formations" style="width:100%; height:100%; object-fit:cover;">

@@ -1,6 +1,7 @@
 <?php
 // Connexion à la base de données
 session_start();
+define('BASE_URL', 'http://educationdz.free.nf)/');
 
 $host = "localhost";
 $username = "root";

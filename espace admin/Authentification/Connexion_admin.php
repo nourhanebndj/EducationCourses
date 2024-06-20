@@ -1,4 +1,5 @@
 <?php 
+
 require("../php/Connexion_bdd.php"); 
 
 function input_filter($data) {

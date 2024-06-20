@@ -1,8 +1,11 @@
 <?php
+define('BASE_URL', 'http://educationdz.free.nf)/');
+
 session_start();
 if(!isset($_SESSION['AdminLoginId'])){
     header("location:./Authentification/Connexion_admin.php");
 }
+$message='';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +23,8 @@ if(!isset($_SESSION['AdminLoginId'])){
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/admin.css">
+    <!-- Custom JS -->
+    <script src="../js/scripts.js"></script>
 </head>
 
 <body>
@@ -82,7 +87,7 @@ if(!isset($_SESSION['AdminLoginId'])){
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
+                    <a href="./commande/commande.php" target="_blank">
                         <span class="material-icons-outlined">fact_check</span> Commandes
                     </a>
                 </li>

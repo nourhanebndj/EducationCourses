@@ -1,3 +1,27 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '../espace admin/php/Connexion_bdd.php'; 
+session_start();
+
+// Fetch categories from the database
+$categories = [];
+$query = "SELECT * FROM catégories";
+$query_run = mysqli_query($con, $query);
+if ($query_run) {
+    while ($row = mysqli_fetch_assoc($query_run)) {
+        $categories[] = $row;
+    }
+}
+$formations = [];
+$query_formations = "SELECT f.Id_formations, f.images, f.nom_formation, c.nomcategorie, f.description, f.Prix, f.Prix_Promotion 
+                     FROM formations f 
+                     JOIN catégories c ON f.Id_categorie = c.Id_categorie";
+$query_formations_run = mysqli_query($con, $query_formations);
+if ($query_formations_run) {
+    while ($row = mysqli_fetch_assoc($query_formations_run)) {
+        $formations[] = $row;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,21 +66,22 @@
                         </a>
 
                         <ul class="dropdown__menu">
-                            <li><a href="#" class="dropdown__link"><i class="ri-pie-chart-line"></i>Graphic Design</a>
+                            <?php foreach ($categories as $category): ?>
+                            <li>
+                                <a href="formations_categories.php?Id_categorie=<?php echo $category['Id_categorie']; ?>"
+                                    class="dropdown__link"><?php echo htmlspecialchars($category['nomcategorie']); ?></a>
                             </li>
-                            <li><a href="#" class="dropdown__link"><i class="ri-store-line"></i>Boutique en ligne</a>
-                            </li>
-                            <li><a href="#" class="dropdown__link"><i class="ri-facebook-circle-line"></i>Facebook
-                                    Ads</a></li>
-                            <li><a href="#" class="dropdown__link"><i class="ri-camera-line"></i>Photographie de
-                                    produits</a>
-                            </li>
+                            <?php endforeach; ?>
                         </ul>
                     </li>
                     <li><a href="contact.php" class="nav__link"><i class="ri-contacts-line"></i> Contactez-nous</a>
                     </li>
                     <li><a href="se_connecter.php" class="nav__link"><i class="ri-user-2-line"></i> Se connecter</a>
                     </li>
+                    <li><a href="cart.php" class="nav__link">
+                            <i class="ri-shopping-cart-2-line"></i>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a></li>
 
                 </ul>
 
@@ -65,71 +90,25 @@
         </nav>
     </header>
     <section class="formations">
+        <?php foreach ($formations as $formation): ?>
         <div class="card-formation">
-            <img src="./image/formation_web_design.jpg">
-            <p>Boutique en ligne / Web Design</p>
-            <h6>12.000 Da</h6>
-            <button class="buy-button">
-                S'inscrire à la formation
-            </button>
+            <img src="../espace admin/uploads/<?php echo htmlspecialchars($formation['images']); ?>"
+                alt="<?php echo htmlspecialchars($formation['nom_formation']); ?>">
+            <h5><?php echo htmlspecialchars($formation['nom_formation']); ?></h5>
+            <p><?php echo htmlspecialchars($formation['nomcategorie']); ?></p>
+            <?php if (!empty($formation['Prix_Promotion'])): ?>
+            <h6><?php echo htmlspecialchars($formation['Prix']); ?> Da</h6>
+            <p><?php echo htmlspecialchars($formation['Prix_Promotion']); ?> Da</p>
+            <?php else: ?>
+            <p><?php echo htmlspecialchars($formation['Prix']); ?> Da</p>
+            <?php endif; ?>
+            <a href="formation_detail.php?id=<?php echo htmlspecialchars($formation['Id_formations']); ?>"
+                class="buy-button">S'inscrire à la formation</a>
+
         </div>
-        <div class="card-formation">
-            <img src="./image/formation_web_design.jpg">
-            <p>Boutique en ligne / Web Design</p>
-            <h6>12.000 Da</h6>
-            <button class="buy-button">
-                S'inscrire à la formation
-            </button>
-        </div>
-        <div class="card-formation">
-            <img src="./image/formation_web_design.jpg">
-            <p>Boutique en ligne / Web Design</p>
-            <h6>12.000 Da</h6>
-            <button class="buy-button">
-                S'inscrire à la formation
-            </button>
-        </div>
-        <div class="card-formation">
-            <img src="./image/formation_web_design.jpg">
-            <p>Boutique en ligne / Web Design</p>
-            <h6>12.000 Da</h6>
-            <button class="buy-button">
-                S'inscrire à la formation
-            </button>
-        </div>
-        <div class="card-formation">
-            <img src="./image/formation_web_design.jpg">
-            <p>Boutique en ligne / Web Design</p>
-            <h6>12.000 Da</h6>
-            <button class="buy-button">
-                S'inscrire à la formation
-            </button>
-        </div>
-        <div class="card-formation">
-            <img src="./image/formation_web_design.jpg">
-            <p>Boutique en ligne / Web Design</p>
-            <h6>12.000 Da</h6>
-            <button class="buy-button">
-                S'inscrire à la formation
-            </button>
-        </div>
-        <div class="card-formation">
-            <img src="./image/formation_web_design.jpg">
-            <p>Boutique en ligne / Web Design</p>
-            <h6>12.000 Da</h6>
-            <button class="buy-button">
-                S'inscrire à la formation
-            </button>
-        </div>
-        <div class="card-formation">
-            <img src="./image/formation_web_design.jpg">
-            <p>Boutique en ligne / Web Design</p>
-            <h6>12.000 Da</h6>
-            <button class="buy-button">
-                S'inscrire à la formation
-            </button>
-        </div>
+        <?php endforeach; ?>
     </section>
+
 </body>
 <!--=============== Footer ===============-->
 

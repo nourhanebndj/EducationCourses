@@ -1,0 +1,6 @@
+{
+    "require": {
+        "chargily/chargily-pay": "^2.0",
+        "dompdf/dompdf": "^3.0"
+    }
+}

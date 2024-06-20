@@ -1,5 +1,6 @@
 <?php
 //Connexion base de donnée
+define('BASE_URL', 'http://educationdz.free.nf)/');
 
 session_start();
 

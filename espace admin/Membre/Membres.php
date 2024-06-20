@@ -1,4 +1,5 @@
 <?php
+
 echo realpath('../espace_utilisateur/php/Connexion_user.php');
 
 require_once '../php/Connexion_bdd.php'; 
@@ -32,6 +33,8 @@ if (!isset($_SESSION['AdminLoginId'])) {
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/admin.css">
+    <script src="../js/scripts.js"></script>
+
 </head>
 
 <body>

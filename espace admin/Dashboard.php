@@ -1,4 +1,6 @@
 <?php
+define('BASE_URL', 'http://educationdz.free.nf)/');
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '../espace_utilisateur/php/Connexion_user.php'; 
 
 // Connexion à la base de données 'admin' pour les catégories
@@ -8,12 +10,13 @@ if (mysqli_connect_error()) {
     exit();
 }
 
-// Connexion à la base de données 'education' pour les membres
+// Connexion à la base de données 'education' pour les membres et les formations
 $con_education = mysqli_connect("localhost", "root", "", "education");
 if (mysqli_connect_error()) {
     echo "Erreur de connexion à la base de donnée 'education'";
     exit();
 }
+
 
 session_start();
 if (!isset($_SESSION['AdminLoginId'])) {
@@ -33,7 +36,30 @@ if ($result_categories) {
 } else {
     echo 'Erreur lors de l\'exécution de la requête pour les catégories : ' . mysqli_error($con_admin);
 }
-
+// Nombre de commande
+$total_commande = 0;
+$query_commande = "SELECT COUNT(*) as total_commande FROM commande"; 
+$result_commande = mysqli_query($con_admin, $query_commande);
+if ($result_commande) {
+    $row_commande = mysqli_fetch_assoc($result_commande);
+    if ($row_commande) {
+        $total_commande = $row_commande['total_commande'];
+    }
+} else {
+    echo 'Erreur lors de l\'exécution de la requête pour les commandes : ' . mysqli_error($con_admin);
+}
+// Nombre de formations
+$total_formations = 0;
+$query_formations = "SELECT COUNT(*) as total_formations FROM formations"; // Vérifiez le nom correct de la table
+$result_formations = mysqli_query($con_admin, $query_formations);
+if ($result_formations) {
+    $row_formations = mysqli_fetch_assoc($result_formations);
+    if ($row_formations) {
+        $total_formations = $row_formations['total_formations'];
+    }
+} else {
+    echo 'Erreur lors de l\'exécution de la requête pour les formations : ' . mysqli_error($con_admin);
+}
 // Nombre de membres
 $total_members = 0;
 $query_members = "SELECT COUNT(*) as total_members FROM membre";
@@ -127,7 +153,7 @@ mysqli_close($con_education);
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
+                    <a href="./commande/commande.php" target="_blank">
                         <span class="material-icons-outlined">fact_check</span> Commandes
                     </a>
                 </li>
@@ -159,7 +185,7 @@ mysqli_close($con_education);
                         <h3>Formations</h3>
                         <span class="material-icons-outlined">inventory_2</span>
                     </div>
-                    <h1>249</h1>
+                    <h1><?php echo $total_formations;?></h1>
                 </div>
                 <div class="card">
                     <div class="card-inner">
@@ -182,24 +208,11 @@ mysqli_close($con_education);
                         <h3>Commandes</h3>
                         <span class="material-icons-outlined">notification_important</span>
                     </div>
-                    <h1>56</h1>
+                    <h1><?php echo $total_commande; ?></h1>
                 </div>
 
             </div>
 
-            <div class="charts">
-
-                <div class="charts-card">
-                    <h2 class="chart-title">Nouvaux Formations </h2>
-                    <div id="bar-chart"></div>
-                </div>
-
-                <div class="charts-card">
-                    <h2 class="chart-title">Membres</h2>
-                    <div id="area-chart"></div>
-                </div>
-
-            </div>
         </main>
         <!-- End Main -->
 

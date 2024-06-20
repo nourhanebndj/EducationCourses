@@ -73,6 +73,8 @@ if (isset($_POST['update-formation_btn'])) {
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/admin.css">
+    <!-- Custom JS -->
+    <script src="../js/scripts.js"></script>
     <style>
     /* Styles pour les labels */
     label {
@@ -178,7 +180,7 @@ if (isset($_POST['update-formation_btn'])) {
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
+                    <a href="../commande/commande.php" target="_blank">
                         <span class="material-icons-outlined">fact_check</span> Commandes
                     </a>
                 </li>

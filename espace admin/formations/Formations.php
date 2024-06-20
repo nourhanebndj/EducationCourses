@@ -21,6 +21,8 @@ if(!isset($_SESSION['AdminLoginId'])){
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/admin.css">
+    <!-- Custom JS -->
+    <script src="../js/scripts.js"></script>
 
 </head>
 
@@ -84,7 +86,7 @@ if(!isset($_SESSION['AdminLoginId'])){
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
+                    <a href="../commande/commande.php" target="_blank">
                         <span class="material-icons-outlined">fact_check</span> Commandes
                     </a>
                 </li>
@@ -181,57 +183,7 @@ if(!isset($_SESSION['AdminLoginId'])){
             </div>
         </main>
     </div>
-    <!-- The Modal -->
-    <div id="deleteConfirmationModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Confirmer la suppression</h2>
-            <p>Êtes-vous sûr de vouloir supprimer cette formation ?</p>
-            <div class="modal-actions">
-                <button id="confirmDelete">Confirmer</button>
-                <button id="cancelDelete">Annuler</button>
-            </div>
-        </div>
-    </div>
 
-</body>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById('deleteConfirmationModal');
-    var btns = document.querySelectorAll('.delete-btn');
-    var closeBtn = document.querySelector('.close');
-    var cancelBtn = document.getElementById('cancelDelete');
-    var confirmBtn = document.getElementById('confirmDelete');
-
-    btns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            modal.style.display = 'block';
-            confirmBtn.dataset.id = btn.getAttribute(
-                'data-id'); // Pass the ID to confirm button
-        });
-    });
-
-    closeBtn.onclick = function() {
-        modal.style.display = 'none';
-    };
-
-    cancelBtn.onclick = function() {
-        modal.style.display = 'none';
-    };
-
-    confirmBtn.onclick = function() {
-        var id = this.dataset.id;
-        console.log("Deleting ID:", id);
-        modal.style.display = 'none';
-    };
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    };
-});
-</script>
 
 
 

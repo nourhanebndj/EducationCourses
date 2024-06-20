@@ -39,6 +39,8 @@ if ($con->connect_error) {
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/admin.css">
+    <!-- Custom JS -->
+    <script src="../js/scripts.js"></script>
 </head>
 
 <body>
@@ -100,7 +102,7 @@ if ($con->connect_error) {
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="#" target="_blank">
+                    <a href="./commande/commande.php" target="_blank">
                         <span class="material-icons-outlined">fact_check</span> Commandes
                     </a>
                 </li>

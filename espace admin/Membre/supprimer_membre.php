@@ -1,5 +1,6 @@
 <?php
 //Connexion base de donnée
+define('BASE_URL', 'http://educationdz.free.nf)/');
 
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '../espace_utilisateur/php/Connexion_user.php'; 

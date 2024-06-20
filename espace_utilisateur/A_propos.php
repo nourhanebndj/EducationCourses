@@ -1,3 +1,17 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '../espace admin/php/Connexion_bdd.php'; 
+session_start();
+
+// Fetch categories from the database
+$categories = [];
+$query = "SELECT * FROM catégories";
+$query_run = mysqli_query($con, $query);
+if ($query_run) {
+    while ($row = mysqli_fetch_assoc($query_run)) {
+        $categories[] = $row;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,21 +56,22 @@
                         </a>
 
                         <ul class="dropdown__menu">
-                            <li><a href="#" class="dropdown__link"><i class="ri-pie-chart-line"></i>Graphic Design</a>
+                            <?php foreach ($categories as $category): ?>
+                            <li>
+                                <a href="formations_categories.php?Id_categorie=<?php echo $category['Id_categorie']; ?>"
+                                    class="dropdown__link"><?php echo htmlspecialchars($category['nomcategorie']); ?></a>
                             </li>
-                            <li><a href="#" class="dropdown__link"><i class="ri-store-line"></i>Boutique en ligne</a>
-                            </li>
-                            <li><a href="#" class="dropdown__link"><i class="ri-facebook-circle-line"></i>Facebook
-                                    Ads</a></li>
-                            <li><a href="#" class="dropdown__link"><i class="ri-camera-line"></i>Photographie de
-                                    produits</a>
-                            </li>
+                            <?php endforeach; ?>
                         </ul>
                     </li>
                     <li><a href="contact.php" class="nav__link"><i class="ri-contacts-line"></i> Contactez-nous</a>
                     </li>
                     <li><a href="se_connecter.php" class="nav__link"><i class="ri-user-2-line"></i> Se connecter</a>
                     </li>
+                    <li><a href="cart.php" class="nav__link">
+                            <i class="ri-shopping-cart-2-line"></i>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a></li>
 
                 </ul>
 
