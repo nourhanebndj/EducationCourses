@@ -95,8 +95,8 @@ $categories[] = $row;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.0.7/css/boxicons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js" defer></script>
     <style>
     .category {
         font-size: 14px;
@@ -167,30 +167,38 @@ $categories[] = $row;
     <header class="header">
         <nav class="nav container">
             <div class="nav__data">
-                <a href="#" class="nav__logo"><i class="ri-book-line"></i> Education</a>
+                <a href="#" class="nav__logo">
+                    <i class="ri-book-line"></i> Education
+                </a>
                 <div class="nav__toggle" id="nav-toggle">
                     <i class="ri-menu-line nav__burger"></i>
                     <i class="ri-close-line nav__close"></i>
                 </div>
             </div>
+
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
-                    <li><a href="home.php" class="nav__link"><i class="ri-home-line"></i> Accueil</a></li>
-                    <li><a href="A_propos.php" class="nav__link"><i class="ri-information-line"></i> À propos</a></li>
+                    <li><a href="../pages/home.php" class="nav__link"><i class="ri-home-line"></i> Accueil</a></li>
+                    <li><a href="../pages/A_propos.php" class="nav__link"><i class="ri-information-line"></i> À
+                            propos</a></li>
                     <li class="dropdown__item">
-                        <a href="formations.php" class="nav__link">Formations <i
-                                class="ri-arrow-down-s-line dropdown__arrow"></i></a>
+                        <a href="../formations/formations.php" class="nav__link">
+                            Formations <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </a>
                         <ul class="dropdown__menu">
                             <?php foreach ($categories as $category): ?>
                             <li>
-                                <a href="formations_categories.php?Id_categorie=<?php echo htmlspecialchars($category['Id_categorie']); ?>"
+                                <a href="../formations/formations_categories.php?Id_categorie=<?php echo htmlspecialchars($category['Id_categorie']); ?>"
                                     class="dropdown__link"><?php echo htmlspecialchars($category['nomcategorie']); ?></a>
                             </li>
                             <?php endforeach; ?>
                         </ul>
                     </li>
-                    <li><a href="contact.php" class="nav__link"><i class="ri-contacts-line"></i> Contactez-nous</a></li>
-                    <li><a href="se_connecter.php" class="nav__link"><i class="ri-user-2-line"></i> Se connecter</a>
+                    <li><a href="../pages/contact.php" class="nav__link"><i class="ri-contacts-line"></i>
+                            Contactez-nous</a></li>
+                    <li><a href="../authentification/se_connecter.php" class="nav__link"><i class="ri-user-2-line"></i>
+                            Se
+                            connecter</a>
                     </li>
                 </ul>
             </div>

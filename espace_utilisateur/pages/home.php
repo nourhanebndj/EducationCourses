@@ -28,7 +28,7 @@ if ($query_run) {
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
 
     <!--===============  Chemins CSS ===============-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <title>Coursera</title>
 </head>
@@ -39,9 +39,8 @@ if ($query_run) {
         <nav class="nav container">
             <div class="nav__data">
                 <a href="#" class="nav__logo">
-                    <i class="ri-book-line"></i>Education
+                    <i class="ri-book-line"></i> Education
                 </a>
-
                 <div class="nav__toggle" id="nav-toggle">
                     <i class="ri-menu-line nav__burger"></i>
                     <i class="ri-close-line nav__close"></i>
@@ -50,31 +49,29 @@ if ($query_run) {
 
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
-                    <li><a href="home.php" class="nav__link"><i class="ri-home-line"></i> Accueil</a></li>
-                    <li><a href="A_propos.php" class="nav__link"><i class="ri-information-line"></i> A propos</a></li>
+                    <li><a href="../pages/home.php" class="nav__link"><i class="ri-home-line"></i> Accueil</a></li>
+                    <li><a href="../pages/A_propos.php" class="nav__link"><i class="ri-information-line"></i> À
+                            propos</a></li>
                     <li class="dropdown__item">
-                        <a href="formations.php" class="nav__link">
+                        <a href="../formations/formations.php" class="nav__link">
                             Formations <i class="ri-arrow-down-s-line dropdown__arrow"></i>
                         </a>
-
                         <ul class="dropdown__menu">
                             <?php foreach ($categories as $category): ?>
                             <li>
-                                <a href="formations_categories.php?Id_categorie=<?php echo $category['Id_categorie']; ?>"
+                                <a href="../formations/formations_categories.php?Id_categorie=<?php echo htmlspecialchars($category['Id_categorie']); ?>"
                                     class="dropdown__link"><?php echo htmlspecialchars($category['nomcategorie']); ?></a>
                             </li>
                             <?php endforeach; ?>
                         </ul>
                     </li>
-                    <li><a href="contact.php" class="nav__link"><i class="ri-contacts-line"></i> Contactez-nous</a>
+                    <li><a href="../pages/contact.php" class="nav__link"><i class="ri-contacts-line"></i>
+                            Contactez-nous</a></li>
+                    <li><a href="../authentification/se_connecter.php" class="nav__link"><i class="ri-user-2-line"></i>
+                            Se
+                            connecter</a>
                     </li>
-                    <li><a href="se_connecter.php" class="nav__link"><i class="ri-user-2-line"></i> Se connecter</a>
-                    </li>
-
-
                 </ul>
-
-
             </div>
         </nav>
     </header>
@@ -82,14 +79,15 @@ if ($query_run) {
 
     <section class="home">
         <div class="home-image">
-            <img src="./image/home-image.jpg" alt="Image de l'école" style="width:100%; height:100%; object-fit:cover;">
+            <img src="../image/home-image.jpg" alt="Image de l'école"
+                style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="home-text">
             <h4>On est une école qui travaille sur</h4>
             <h1>L'évolution de la formation en Algérie</h1>
             <p>Une école de formation innovante pour un apprentissage facile et efficace des compétences les plus
                 recherchées par les entreprises.</p>
-            <a href="./formations.php" class="btn">Voir nos formations</a>
+            <a href="../formations/formations.php" class="btn">Voir nos formations</a>
         </div>
     </section>
     <!--=============== Home Section 2 ===============-->
@@ -104,22 +102,22 @@ if ($query_run) {
         </div>
         <div class="cards-container">
             <div class="card">
-                <div class="card-icon"><img src="./image/customer-satisfaction.gif" alt="Icon 1"></div>
+                <div class="card-icon"><img src="../image/customer-satisfaction.gif" alt="Icon 1"></div>
                 <h3>Adapté à tout niveau</h3>
                 <p> Riche et flexible, nos programmes conviennent à tous le monde</p>
             </div>
             <div class="card elevated">
-                <div class="card-icon"><img src="./image/setting.gif" alt="Icon 2"></div>
+                <div class="card-icon"><img src="../image/setting.gif" alt="Icon 2"></div>
                 <h3>Basé sur la pratique</h3>
                 <p>Au bout de chaque formation vous aurez à réaliser un projet pratique</p>
             </div>
             <div class="card">
-                <div class="card-icon"><img src="./image/support.gif" alt="Icon 4"></div>
+                <div class="card-icon"><img src="../image/support.gif" alt="Icon 4"></div>
                 <h3>Une assistance continue</h3>
                 <p>On sera toujours là pour vous aider même après la formation.</p>
             </div>
             <div class="card elevated">
-                <div class="card-icon"><img src="./image/heart.gif" alt="Icon 3"></div>
+                <div class="card-icon"><img src="../image/heart.gif" alt="Icon 3"></div>
                 <h3>Des formateurs passionnés</h3>
                 <p>Nos formateurs sont des professionnels passionnés par leurs domaines.</p>
             </div>
@@ -134,10 +132,10 @@ if ($query_run) {
             <p>Zducations Academy propose des formations exclusivement dédiées au monde du digital.
                 Toutes les formations enseignées vous permettront de vous positionner comme un professionnel du domaine
                 et vous propulseront dans le monde du travail professionnel.</p>
-            <a href="./formations.php" class="btn">Voir nos formations</a>
+            <a href="../formations/formations.php" class="btn">Voir nos formations</a>
         </div>
         <div class="home-image">
-            <img src="./image/formations.png" alt="Formations" style="width:100%; height:100%; object-fit:cover;">
+            <img src="../image/formations.png" alt="Formations" style="width:100%; height:100%; object-fit:cover;">
         </div>
     </section>
     <!--=============== Section 4 ===============-->
@@ -196,7 +194,7 @@ if ($query_run) {
         <div class="contact">
             <h4>Qu'attendez vous ?</h4>
             <h2>Commencez votre fomation maintenant !</h2>
-            <a href="#" class="btn">Voir nos formations</a>
+            <a href="../formations/formations.php" class="btn">Voir nos formations</a>
             <p> Retrouvez nous sur les réseaux</p>
             <div class="social-icons">
                 <a href="https://facebook.com" class="social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -210,7 +208,7 @@ if ($query_run) {
 
 
     <!--=============== MAIN JS ===============-->
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 <footer>
     <div class="footer-content">

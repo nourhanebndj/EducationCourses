@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($mdp, $user['mdp'])) {
         $_SESSION['user_id'] = $user['Id_membre'];
         $_SESSION['user_name'] = $user['NomComplet'];
-        header("Location: home.php");
+        header("Location:../pages/home.php");
         exit();
     } else {
         echo "Identifiants de connexion invalides.";
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
 
     <!--===============  Chemins CSS ===============-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <title>Coursera</title>
 </head>

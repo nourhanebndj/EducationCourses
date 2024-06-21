@@ -50,8 +50,8 @@ if (!$formation) {
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
 
     <!--===============  Chemins CSS ===============-->
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js" defer></script>
     <style>
     .category {
         font-size: 14px;
@@ -76,23 +76,27 @@ if (!$formation) {
 
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
-                    <li><a href="home.php" class="nav__link"><i class="ri-home-line"></i> Accueil</a></li>
-                    <li><a href="A_propos.php" class="nav__link"><i class="ri-information-line"></i> À propos</a></li>
+                    <li><a href="../pages/home.php" class="nav__link"><i class="ri-home-line"></i> Accueil</a></li>
+                    <li><a href="../pages/A_propos.php" class="nav__link"><i class="ri-information-line"></i> À
+                            propos</a></li>
                     <li class="dropdown__item">
-                        <a href="formations.php" class="nav__link">
+                        <a href="../formations/formations.php" class="nav__link">
                             Formations <i class="ri-arrow-down-s-line dropdown__arrow"></i>
                         </a>
                         <ul class="dropdown__menu">
                             <?php foreach ($categories as $category): ?>
                             <li>
-                                <a href="formations_categories.php?Id_categorie=<?php echo htmlspecialchars($category['Id_categorie']); ?>"
+                                <a href="../formations/formations_categories.php?Id_categorie=<?php echo htmlspecialchars($category['Id_categorie']); ?>"
                                     class="dropdown__link"><?php echo htmlspecialchars($category['nomcategorie']); ?></a>
                             </li>
                             <?php endforeach; ?>
                         </ul>
                     </li>
-                    <li><a href="contact.php" class="nav__link"><i class="ri-contacts-line"></i> Contactez-nous</a></li>
-                    <li><a href="se_connecter.php" class="nav__link"><i class="ri-user-2-line"></i> Se connecter</a>
+                    <li><a href="../pages/contact.php" class="nav__link"><i class="ri-contacts-line"></i>
+                            Contactez-nous</a></li>
+                    <li><a href="../authentification/se_connecter.php" class="nav__link"><i class="ri-user-2-line"></i>
+                            Se
+                            connecter</a>
                     </li>
                 </ul>
             </div>
@@ -100,7 +104,7 @@ if (!$formation) {
     </header>
     <section class="row">
         <div class="img-holder">
-            <img src="../espace admin/uploads/<?php echo htmlspecialchars($formation['images']); ?>" class="img"
+            <img src="../<?php echo htmlspecialchars($formation['images']); ?>" class="img"
                 alt="<?php echo htmlspecialchars($formation['nom_formation']); ?>" />
         </div>
         <div class="product-details-holder">
@@ -118,7 +122,7 @@ if (!$formation) {
             </h6>
             <p class="short-description"><?php echo nl2br(htmlspecialchars($formation['description'])); ?></p>
             <div class="action-buttons">
-                <a href="checkout.php?id=<?php echo htmlspecialchars($formation['Id_formations']); ?>"
+                <a href="../Checkout/checkout.php?id=<?php echo htmlspecialchars($formation['Id_formations']); ?>"
                     class="buy-now-btn"><i class="fa-solid fa-shop"></i> S'inscrire maintenant</a>
             </div>
         </div>

@@ -23,7 +23,7 @@ if (isset($_POST['envoi'])) {
             if ($success) {
                 $_SESSION['user_id'] = $bdd->lastInsertId(); 
                 $_SESSION['user_name'] = $NomComplet; 
-                header("Location: home.php");
+                header("Location: ../pages/home.php");
                 exit(); 
             } else {
                 $message = "Erreur lors de l'inscription.";
@@ -44,7 +44,7 @@ if (isset($_POST['envoi'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Inscription</title>
 </head>
 
